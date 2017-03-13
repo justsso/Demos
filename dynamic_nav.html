@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>动态导航</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<script type="text/javascript">
+			window.onload=function(){				
+				var lis = document.getElementsByClassName("level1");
+				var len=lis.length;
+//				alert(len);
+				for( var i=0;i<len;i++){
+					lis[i].onmouseover = function(){
+						var lel2 = document.getElementsByClassName("level2")[i];
+						lel2.style.display = "block";
+						
+					}
+				}
+				var a = document.getElementById("a");
+				a.onmousedown = function(){
+					this.style.color = "red";
+				}
+			}
+		</script>
+		<style>
+			.clearfix{
+				zoom: 1;
+			}
+			a{
+				color: white;
+			}
+			.main-nav>li {
+				float: left;
+				position: relative;
+				display: list-item;
+				text-align: -webkit-match-parent;
+				width: 120px;
+				height: 60px;
+				
+				line-height: 60px;
+				text-align: center;
+				border: 1px solid gray;
+				margin: 10px 5px ;
+				border-radius: 5px;
+				background-color: #333333;
+				color: white;
+				font-weight: bold;
+			}
+			.main-nav>li:hover{
+				transform: translateY(-5px);				
+			}
+			.level2{
+				position: absolute;
+				top: 60px;
+				left: 0;				
+				display: none;
+				height: 0;
+			}
+			@-webkit-keyframes addhigh{
+				0{ height: 0;}
+				20%{
+					 height: 50px;
+					background-color: white;
+				}
+				50%{
+					 height: 100px;
+					background-color: antiquewhite;
+				}
+				75%{
+					 height: 160px;
+					background-color: #CCCCCC;
+				}
+				100%{
+					
+					 height: 220px;
+					background-color: #808080;
+					opacity: 1.0;
+					
+				}
+			}
+			.main-nav>li:hover .level2{
+				display: block;
+				opacity: 0.8;
+				
+				-webkit-animation-name: addhigh;
+				-webkit-animation-duration: 0.3s;
+				-webkit-animation-timing-function: ease-in-out;
+				-webkit-animation-fill-mode: forwards;
+			}
+			.level2>ul{
+				padding-left: 0;
+			}
+			.level2>ul>li{				
+				display: block;
+				width: 120px;
+				
+				
+			}
+			.level2>ul>li>a{
+				display: block;
+				width: 120px;
+				height: 40px;
+				line-height: 40px;
+				margin-top: 2px ;
+				border: 1px solid bisque;
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+		<ul class="main-nav clearfix">
+			<li class="level1"> 
+				首页
+				<div class="level2">
+					<ul >
+						<li> <a href="#" id="a">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="level1"> 
+				前端入门
+				<div class="level2">
+					<ul >
+						<li> <a href="#">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="level1"> 
+				前端进阶
+				<div class="level2">
+					<ul >
+						<li> <a href="#">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="level1"> 
+				网站设计
+				<div class="level2">
+					<ul >
+						<li> <a href="#">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="level1"> 在线工具
+				<div class="level2">
+					<ul >
+						<li> <a href="#">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+				
+			</li>
+			<li class="level1"> 常用下载
+				<div class="level2">
+					<ul >
+						<li> <a href="#">HTML入门</a></li>
+						<li> <a href="#">CSS入门</a></li>
+						<li> <a href="#">Javascript入门</a></li>
+						<li> <a href="#">jQuery入门</a></li>
+						<li> <a href="#">Sass入门</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>
