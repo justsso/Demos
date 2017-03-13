@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>css3-3d制作旋转立方体</title>
+		<style>
+			img{
+				width: 100px;
+				height: 100px;
+				border: none;
+			}
+			.wrap{
+				width: 200px;
+				height: 300px;
+				padding: 100px;
+				border: 5px solid #000;
+				margin: 100px auto;
+				-webkit-perspective: 5000px;
+				/*景深，影响的这个元素的后代元素*/
+				perspective-origin: 100px 100px; 
+				
+			}
+			.surfaces{
+				width: 100px;
+				height: 10px;
+				background-color: red;
+				position: relative;
+				transform-style: preserve-3d;/*transform-style: preserve-3d;仅影响这个元素的子元素*/
+				
+			}
+			#space{
+				transform-style: preserve-3d;
+				/*preserve-3d表示所有子元素在3D空间中呈现。*/
+				/*surfaces代表的是这个立方体，想让立方体拥有3d效果，所以立方体的父元素必须设置transform-style: preserve-3d;*/
+			}
+			.surfaces{
+				-moz-transform-origin: center center;
+				transform-origin: 50px 50px -50px;
+				animation-iteration-count: infinite;
+				animation-duration: 4s;
+				animation-play-state: running;
+				animation-fill-mode:backwards;
+				animation-name: autoRotate;
+				animation-timing-function: linear;
+			}
+			.surfaces div{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				color: white;
+				font-size: 50px;
+				font-family: "微软雅黑";
+				text-align: center;
+				line-height: 100px;
+			}
+			.surfaces div:nth-of-type(1){
+				left: 0;
+				top: -100px;
+				background-color: #FFA500;
+				transform-origin: bottom;
+				transform: rotateX(90deg);
+			}
+			.surfaces div:nth-of-type(2){
+				left: 100px;
+				top: 0;
+				background-color: #447898;
+				transform-origin: left;
+				transform: rotateY(90deg);
+			}
+			.surfaces div:nth-of-type(3){
+				left: 0;
+				top: 100px;
+				background-color: #F85770;
+				transform-origin: top;
+				transform: rotateX(-90deg);
+			}
+			.surfaces div:nth-of-type(4){
+				left: -100px;
+				top: 0;
+				background-color: #124537;
+				transform-origin: right;
+				transform: rotateY(-90deg);
+			}
+			.surfaces div:nth-of-type(5){
+				left: 0;
+				top: 0;
+				background-color: #FF6600;
+				transform: translateZ(-100px) rotateY(-180deg);
+				
+			}
+			.surfaces div:nth-of-type(6){
+				left: 0;
+				top: 0;
+				background-color: #FFA777;
+			}
+			@-webkit-keyframes autoRotate{
+				0%{	
+					transform: rotateY(0deg) ;					
+				}
+				20%{
+					transform: rotateY(15deg);
+					
+				}
+				40%{
+					transform: rotateY(30deg);
+				}
+				60%{
+					transform: rotateY(45deg) rotateX(0deg);
+				}
+				80%{
+					transform-origin: 50px 50px -50px;
+					transform: rotateY(45deg) rotateX(180deg);
+					
+				}
+				100%{
+					/*transform-origin: 50px 50px -50px;*/
+					transform: rotateY(45deg) rotateX(360deg);
+					
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			
+		
+		<div id="space">
+			<div class="surfaces">
+				<div class="surface" id="surface1"><img src="img/樱桃.jpg"/></div>
+				<div class="surface" id="surface2"><img src="img/苹果.jpg"/></div>
+				<div class="surface" id="surface3"><img src="img/西瓜.jpg"/></div>
+				<div class="surface" id="surface4"><img src="img/香蕉.jpg"/></div>
+				<div class="surface" id="surface5"><img src="img/草莓.jpg"/></div>
+				<div class="surface" id="surface6"><img src="img/蓝莓.jpg"/></div>
+			</div>
+		</div>
+		
+		
+		
+		</div>
+	</body>
+</html>
