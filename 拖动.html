@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片拖动</title>
+		<style>
+			#box{
+				width: 250px;
+				height: 200px;
+				border: 1px solid gray;
+				background-color: #CCCCCC;
+				margin: 20px auto;
+				padding: 10px;
+			}
+			
+		</style>
+		<script>
+			function drag(e){
+				
+				e.dataTransfer.setData("text",e.target.id);
+			}
+			function allowDrop(e){
+				e.preventDefault();
+			}
+			
+			function drop(e) {
+				e.preventDefault();
+				var data = e.dataTransfer.getData("text");
+				e.target.appendChild(document.getElementById(data));
+			}
+		</script>
+		
+	</head>
+	<body>
+		
+        <p>拖动图片到矩形中</p>
+        <div id="box" ondrop="drop(event)" ondragover="allowDrop(event)">
+        	
+        </div>
+        <img src="img/bg6.jpg" id="xingkong" width="200" height="150" draggable="true" ondragstart="drag(event)"/>
+	</body>
+</html>
