@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<style>
+		
+		/*
+		 * border-top:是height的三倍，double
+		 * border-bottm:等于height
+		 */
+			.box{
+				width: 100px;
+				height: 20px;
+				border-bottom: 20px solid;
+				border-top: 60px double;
+				margin-bottom: 30px;
+			}
+			.add{
+				display: block;
+				width: 100px;
+				height: 100px;
+				color:#CCCCCC;
+				transition: color; .25s;
+				border: 1px solid;
+			}
+			.add:before{
+				border-top:10px solid;
+			}
+			.add:after{
+				border-left: 10px solid;
+			}
+			.add:hover{
+				color:#06c;
+			}
+			.tra{
+				width: 0px;
+				height: 0px;
+				border: 50px solid;
+				border-color: red green blue orange;
+				border-radius: 50px;
+				
+			}
+			.tra2{
+				margin-top: 20px;
+				width: 0px;
+				height: 0px;
+				border: 50px solid;
+				border-color: transparent transparent transparent orange;
+				
+				
+			}
+			.tra:hover{
+				animation: xuanzhuan 0.5s infinite linear;
+			}
+			@keyframes xuanzhuan{
+				
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+					
+				}
+			}
+			.ibox{
+				border-left: 300px solid #222;
+				
+			}
+			.left{
+				width: 300px;
+				margin-left: -300px;
+				float: left;
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			
+		</div>
+		<a href="javascript:" class="add">+</a>
+		<div class="tra">
+			
+		</div>
+		
+		<div class="tra2">
+			
+		</div>
+		<div class="ibox">
+			<nav class="left">
+				<h3>导航1</h3>
+			</nav>
+			<section>
+				<div class="module">模块一</div>
+			</section>
+		</div>
+	</body>
+
+</html>
