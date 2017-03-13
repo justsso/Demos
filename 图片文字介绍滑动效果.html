@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>CSS3实现图片文字介绍滑动展示效果</title>
+		<style type="text/css">
+			#info {
+				width: 760px;
+				margin: 0 auto;
+			}
+			/*定义外层样式*/
+			
+			.wrap {
+				width: 220px;
+				height: 330px;
+				float: left;
+				position: relative;
+				overflow: hidden;
+				font-family: arial, sans-serif;
+			}
+			
+			.wrap img {
+				border: 0;
+				width: 220px;
+				height: 330px;
+			}
+			
+			.wrap p {
+				/*display: block;*/
+				width: 220px;
+				height: 330px;
+				position: absolute;
+				left: 0;
+				top: 300px;
+				background-color: rgba(0, 0, 0, 0.3);
+				/*使用CSS3 RGBA颜色值*/
+				font-size: 12px;
+				color: #FFFFFF;
+				padding: 0;
+				margin: 0;
+				line-height: 16px;
+				transition: all 0.6s ease-in-out;
+				/*定义CSS3过渡效果,all表示过渡属性针对所有值有变化的CSS属性*/
+			}
+			
+			/*.wrap p b {
+				display: block;
+				font-size: 22px;
+				color: #fc0;
+				text-align: center;
+				margin: 0;
+				padding: 0;
+				line-height: 30px;
+			}*/
+			
+			/*.wrap p span {
+				display: block;
+				padding: 10px;
+				line-height: 20px;
+			}*/
+			
+			.wrap:hover p {
+				top: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="info">
+			<div class="wrap">
+				<img src="img/bg6.jpg" alt="星空">
+				<p>
+					<!--<b>Red Eye Frog</b>
+					<span>Red-eyed tree frogs, as their name states, have bold red eyes with vertically narrowed pupils, a vibrant green body with yellow and blue striped sides, and orange toes. There is a great deal of regional variation in flank and thigh coloration.<br/>Although it has been suggested that A. callidryas' bright colors function as aposematic or sexual signals, neither of these hypotheses have been confirmed.</span>-->
+				</p>
+			</div>
+			<div class="wrap">
+				<img src="img/bg6.jpg" alt="星空">
+				<p>
+					<b>Emperor Penguin</b>
+					<span>The Emperor Penguin (Aptenodytes forsteri) is the tallest and heaviest of all living penguin species and is endemic to Antarctica.<br><br>The male and female are similar in plumage and size, reaching 122 cm (48 in) in height and weighing anywhere from 22.37 kg (48.82 lb). The dorsal parts are black and sharply delineated from the white belly, pale-yellow breast and bright-yellow ear patches.</span>
+				</p>
+			</div>
+			<div class="wrap">
+				<img src="img/bg6.jpg" alt="星空">
+				<p>
+					<b>Pelicans</b>
+					<span>A pelican is a large water bird with a distinctive pouch under the beak, belonging to the bird family Pelecanidae.<br><br>Along with the darters, cormorants, gannets, boobies, frigatebirds, and tropicbirds, pelicans make up the order Pelecaniformes. Modern pelicans are found on all continents except Antarctica.</span>
+				</p>
+			</div>
+		</div>
+	</body>
+
+</html>

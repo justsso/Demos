@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>动态导航</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<style>
+			.clearfix{
+				zoom: 1;
+			}
+			.main-nav>li {
+				float: left;
+				position: relative;
+				display: list-item;
+				text-align: -webkit-match-parent;
+				width: 100px;
+				height: 60px;
+				line-height: 60px;
+				text-align: center;
+				border: 1px solid gray;
+				margin: 10px 5px ;
+				border-radius: 5px;
+				background-color: #CCCCCC;
+				color: white;
+				font-weight: bold;
+			}
+			.main-nav>li:hover{
+				transform: translateY(-5px);
+				background-color: #333333;
+				box-shadow: 5px 5px 2px black;
+			}
+			.show{
+				display: block;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<ul class="main-nav clearfix">
+			<li class="first"> 
+				首页
+			</li>
+			<li> 
+				前端入门
+			</li>
+			<li> 
+				前端进阶
+			</li>
+			<li> 
+				网站设计
+			</li>
+			<li> 在线工具</li>
+			<li> 常用下载</li>
+		</ul>
+	</body>
+</html>

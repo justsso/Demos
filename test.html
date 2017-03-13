@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.container{
+				width: 800px;
+				height: 500px;
+				margin: 30px auto;
+				overflow: hidden;
+			}
+			#img-box{
+				width: 250px;
+				height: 500px;
+				display: inline-block;
+				position: relative;
+			}
+			.txt-box{
+				color: white;
+				width: 250px;
+				background-color: #333333;
+				opacity: 0.5;
+				position: absolute;
+				top: 450px;
+				height: 500px;
+				transition: all 0.3s ease-in-out;
+				
+			}
+			#img-box:hover .txt-box{
+				top: 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div id="img-box">
+				<img src="img/bg6.jpg" alt="星空" width="250" height="500"/>
+				<div class="txt-box">
+					<p>xxx</p>
+				</div>
+			</div>
+			<div id="img-box">
+				<img src="img/bg6.jpg" alt="星空" width="250" height="500"/>
+				<div class="txt-box">
+					<p>xxx</p>
+				</div>
+			</div>
+			<div id="img-box">
+				<img src="img/bg6.jpg" alt="星空" width="250" height="500"/>
+				<div class="txt-box">
+					<p>xxx</p>
+				</div>
+			</div>
+		</div>
+		<h2>匆匆</h2>
+	</body>
+</html>
