@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				margin-top: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+		<input type="button" name="btn" " id="btn" value="点击" />
+		<script>
+			var box = document.getElementById("box");
+			var num = 0;
+			var timer = null;
+			( function changeNum(){
+				
+				if (num==5) {
+					window.cancelAnimationFrame(timer);
+					return;
+				}
+				
+				timer = window.requestAnimationFrame(changeNum);
+				num++;
+				box.innerHTML= num;
+				
+			} )();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			html,body{
+				background: url(img/003.jpg);
+				color: white;
+
+			}
+			#up{
+				width: 566px;
+				height: 100px;
+				margin:0 auto;
+				position: relative;	
+			}
+			hr{
+			
+				border: 1px solid orangered;
+			}
+			#up>span,#down>span{
+				font-size: 20px;
+				position: absolute;
+			}
+			#middle{
+				text-align: right;
+			}			
+			#down{
+				position: absolute;
+				left: 20%;
+				bottom: 40%;
+			}
+			#godown,#goup{
+				width: 75px;
+				height: 38px;
+				border: none;
+				border-radius: 10px;
+				background: #51B584;
+				color: white;
+				margin-right: 30px;
+				outline: none;
+			}
+			#goup{
+				background: #D86565;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			不能连续两次点击上去或者下来
+			通过#up 和#down的两个div元素的坐标差,求得每一个字的left top改变量,实现文字飞舞~
+			要移动的位置是任意的~~
+		-->
+		
+		<div id="up"></div>	
+		<hr />
+		<div id="middle">
+			<button id="godown">下来</button> <button id="goup">上去</button>	
+		</div>
+		<div id="down"></div>
+	</body>
+	<script src="js/tween.js"></script>
+	<!--<script src="js/文字飞舞.js"></script>-->
+	<script src="js/requestAnimationFrame版.js"></script>
+</html>

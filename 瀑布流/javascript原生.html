@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>javaScript原生实现瀑布流</title>
+		<style type="text/css">
+			body{ margin: 0; padding: 0; }
+			ul{
+				width: 1100px;			
+				margin: 0 auto;
+				padding: 0;				
+			}
+			li{
+				width: 200px;
+				list-style: none;
+				float: left;
+				margin: 5px;
+				border-bottom: 1px solid red;
+			}
+			img{
+				display: block;		
+				width: 200px;
+				height: auto;
+				margin-bottom: 10px;
+			}
+			ul>li:last-child{
+				border-bottom: 1px solid blue;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){	
+				
+				var Lis = document.getElementsByTagName('li');
+				var lastLi = Lis[Lis.length-1];
+				var clientHeight = document.documentElement.clientHeight;  //数字			
+				var scrollTop = document.body.scrollTop;  //滚动条距离顶部的距离   数字				
+				//document.body.scrollHeight 是网页全部的高度(包括被滚动条占据的最大高度)				
+				//获取高度最小且没有超过可视区的范围 的索引
+				function getMinHeightLiIndex(){
+					var index = 0;
+					var minHeight = Lis[0].offsetHeight;
+					for (var i=1;i<Lis.length;i++) {
+						if(Lis[i].offsetHeight<minHeight){
+							index = i;
+							minHeight = this.offsetHeight;
+						}
+					}
+					return index;
+				}				
+			 	function getSrc(){
+			 		var src = "";
+			 		var srcArr = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg'];	
+			 		var index = Math.floor(5*Math.random());
+			 		return srcArr[index];
+			 	}
+				
+				//图片加载方法
+				
+				function loadImags(index){
+					var imgHeigth = getHeight(200,300);
+					var imgSrc = getSrc();				
+//					if((Lis[minHeightIndex].offsetHeight+Lis[minHeightIndex].offsetTop) < allHeight ){
+						var img = document.createElement('img');
+						img.setAttribute('src',imgSrc);
+						img.style.height = imgHeigth+'px';
+//						console.log(img.style.height);
+						Lis[index].appendChild(img);
+//					}					
+				}			
+				
+				window.onscroll = function(){
+					var clientHeight = document.documentElement.clientHeight;
+					var scrollTop = document.body.scrollTop;  //滚动条距离顶部的距离
+					var minIndex = getMinHeightLiIndex();
+					console.log(minIndex);  //每次都输出最短的索引
+					var topHeihgt = clientHeight + scrollTop;
+					while ((Lis[minIndex].offsetHeight+Lis[minIndex].offsetTop) < topHeihgt){
+						loadImags(minIndex);
+					}
+				}
+			}
+			//图片的高度是个随机数
+				function getHeight(min,max){  
+					var num =0;
+					var range = max-min;					
+					var Rand = Math.random();  				
+					num = min+Math.round(range*Rand);					
+					return num;
+				}
+				
+				
+		</script>
+	</head>
+	<body>
+		<!--
+			思路:当每一个li的最后一个图片的底部都超出了可视区的范围时,就停止加载方法
+			用一个长度为5的数组存放每一个li的最后一个图片,利用加载方法,不停的替换 迭代这5个元素
+			加载方法: 获取5个li距离顶部的距离,(在达到有一列没有填满的情况下) 最小的那个添加新的图片,知道所有的列都
+			被填满,就停止加载方法.
+		-->
+		<div id="div1">
+			<ul>
+				<li> <img src="img/1.jpg"/><img src="img/1.jpg"/> <img src="img/5.jpg"/> <img src="img/1.jpg" style="height: 100px;"/></li>
+				<li> <img src="img/2.jpg"/> <img src="img/1.jpg"/> <img src="img/2.jpg"/> </li>
+				<li> <img src="img/3.jpg"/> </li>
+				<li> <img src="img/4.jpg"/> </li>
+				<li> <img src="img/5.jpg"/> <img src="img/1.jpg" style="height: 100px;"/> <img src="img/4.jpg"/> </li>				
+			</ul>
+		</div>
+	</body>
+</html>
