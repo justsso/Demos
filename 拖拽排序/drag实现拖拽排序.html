@@ -29,15 +29,7 @@
     let wrap = $('.wrap');
     let dragObj = null, enterObj = null, dragIndex, enterIndex;
 
-    arr.forEach((text, i) => {
-        let item = document.createElement('div')
-        item.classList = 'item';
-        item.innerText = text;
-        item.draggable = true;
-        item.dataset.index = i;
-        item.style.transition = 'all 0.2s ease';
-        wrap.appendChild(item)
-    })
+    render(arr)
 
 
     wrap.addEventListener('dragstart', function (e) {
@@ -45,30 +37,28 @@
         dragIndex = e.target.dataset.index;
         e.target.style.opacity = "0.1";
     })
+
     wrap.addEventListener('dragend', function (e) {
         console.log('dragend')
         e.target.style.opacity = "1";
-
-        console.log('drop  移动节点')
         e.preventDefault();  // 避免浏览器的默认行为，drop事件的默认行为打开链接
-        console.log(dragObj, enterObj)
         //在当前元素之前插;
 
-        if (e.target.className === 'item') {
-            if (enterObj !== dragObj) {
-                // 进行排序
-                if (dragIndex < enterIndex) {
-                    enterObj.after(dragObj)
-                } else {
-                    enterObj.before(dragObj)
-                }
+        if (enterIndex !== dragIndex) {
+            if (enterIndex > dragIndex) {
+                let delteChild = arr.splice(dragIndex, 1)[0]
+                arr.splice(enterIndex, 0, delteChild)
+                // 删掉所有节点
+                wrap.innerHTML = '';
+                render(arr)
+            } else {
+                let deleChild = arr.splice(dragIndex, 1)[0];
+                arr.splice(enterIndex, 0, deleChild);
+                console.log(arr, 59)
+                wrap.innerHTML = '';
+                render(arr)
             }
         }
-        let items = $$('.item');
-        items.forEach((item, i) => {
-            item.style.transform = `translate(0,0)`;
-            item.dataset.index = i;
-        })
     })
 
     wrap.addEventListener('dragenter', function (e) {
@@ -109,6 +99,21 @@
             }
         }
     })
+
+
+    function render(arr) {
+        arr.forEach((text, i) => {
+            let item = document.createElement('div')
+            item.classList = 'item';
+            item.innerText = text;
+            item.draggable = true;
+            item.dataset.index = i;
+            item.style.transition = 'all 0.2s ease';
+            wrap.appendChild(item)
+        })
+    }
+
+
     wrap.addEventListener('drop', function (e) {
         // console.log('drop  移动节点')
         // e.preventDefault();  // 避免浏览器的默认行为，drop事件的默认行为打开链接
@@ -138,6 +143,16 @@
         // 默认情况下，无法将文字/元素放置到其他元素中。如果需要可以放置，我们要组织默认行为
         e.preventDefault();
     })
+
+    let a = [1, 2, 3, 4, 5]
+    console.log(a)
+    let start = 1
+    let end = 4;
+    let num = a.splice(end, 1)[0];
+    console.log(num)
+    a.splice(0, 0, num)
+    console.log(a)
+
 
 </script>
 </body>
