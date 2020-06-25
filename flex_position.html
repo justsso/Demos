@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.container {
+				position: relative;
+				border: 1px solid #000000;
+				height: 300px;
+				display: flex;
+				/* flex-direction: column; */
+				justify-content: center;
+			}
+
+			.item {
+				position: absolute;
+
+				width: 100px;
+				height: 100px;
+				background-color: #447898;
+			}
+
+			.item:nth-child(1) {
+				left: 0;
+				top: 0;
+			}
+
+			.item:nth-child(2) {
+				left: 200px;
+				top: 0;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.nav-box {
+				width: 100%;
+				
+			}
+
+			ul {
+				position: fixed;
+				width: 100%;
+				top: 0;
+				left: 0;
+				display: flex;
+				justify-content: space-between;
+				margin: 0 15px;
+				background: pink;
+				margin: 0;
+				padding: 0;
+			}
+
+			li {
+				flex: 1;
+				list-style: none;
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+				font-size: 30px;
+				border: 1px solid #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="item ">1</div>
+			<div class="item ">
+				<span>hhh</span><span>jjj</span>
+			</div>
+
+		</div>
+
+
+		<h1>flex布局与position:absolute/fixed踩坑</h5>
+			<!-- <div class="nav-box"> -->
+				<ul>
+					<li>协会简介</li>
+					<li>协会章程</li>
+					<li>协会架构</li>
+					<li>资料下载</li>
+				</ul>
+			<!-- </div> -->
+	</body>
+</html>

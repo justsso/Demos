@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可视区之外的删除</title>
+    <style>
+        .container {
+            width: 500px;
+            height: 500px;
+            overflow: auto;
+            border: 1px solid darkslategray;
+        }
+
+        .div {
+            width: 200px;
+            height: 200px;
+            background: #545454;
+            border: 5px solid darkslategray;
+            padding: 10px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+</div>
+<div class="div"></div>
+
+<script>
+    document.querySelector('.div').onclick = function (e) {
+        let d = e.currentTarget;
+        console.log('offsetHeight', d.offsetHeight, 'clientHeight', d.clientHeight)
+    }
+
+    // 定
+    const column = 1;  //列数
+    let container = document.querySelector('.container');
+    let data = [];  // 所有数据
+    let queen = []; // 要渲染的数据
+    let sum = 0, step = 20;
+    let start = 0, end = 0;
+
+    // 添加列子元素
+    for (let i = 0; i < column; i++) {
+        let container_item = document.createElement('div');
+        container_item.className = 'container_item';
+        container.appendChild(container_item);
+
+    }
+
+    // 初识渲染数据,直至满屏
+    window.onload = function () {
+        while (!isMan()) {
+            getData(sum)
+            sum += 1
+            addEle(data)
+        }
+        start = 0;
+        end = data.length - 1
+
+    }
+
+
+    // 滚动时，维护队列
+    let lastScroll = 0
+    container.onscroll = function (e) {
+        let ScrollH = e.currentTarget.scrollHeight;
+        let ScrollTop = e.currentTarget.scrollTop;
+        let clientH = e.currentTarget.clientHeight;
+        let toDown = true
+        if (ScrollTop > lastScroll) {
+            toDown = true
+        } else {
+            toDown = false
+        }
+        lastScroll = ScrollTop
+
+        if (toDown) {
+            console.log('向下')
+            if (ScrollTop + clientH + 50 > ScrollH) {
+                let i = 5;
+                while (i > 0) {
+                    getData(data.length);
+                    addEle()
+                    i--;
+                }
+
+                let container_item = document.querySelector('.container_item')
+                let children = container_item.childNodes;
+
+                for (const child of children) {
+                    let index = child.dataset.index
+                    let top = child.offsetTop
+                    let height = parseFloat(getComputedStyle(child).height.slice(0, -2));
+                    let bottom = top + height
+
+                    // 上面超出可视区，去除节点
+                    // if (bottom < ScrollTop) {
+                    //     console.log(child, index, 97);
+                    //     container_item.removeChild(child)
+                    //     start = index + 1
+                    // }
+
+                }
+                //谁离开可视区
+            }
+        } else {
+            console.log('向上')
+            // 下面超出可视区，去除节点
+            // if (top > ScrollTop + clientH) {
+            //     container.removeChild(child)
+            //     end = end - 1
+            // }
+        }
+    }
+
+
+    // 往列中渲染1个dom，单列
+    function addEle(queen) {
+        let container_item = document.querySelector('.container_item')
+        let _html = ''
+        let h = createItemH()
+        _html += `<div style="height: ${h}px" data-index="${data.length - 1}" ><span>${data[data.length - 1].num}</span>-<stong>${data[data.length - 1].title}</stong></div>`
+        container_item.innerHTML += _html;
+
+    }
+
+    //生成1个数据的方法
+    function getData(start) {
+        data.push({
+            num: start,
+            title: Math.random().toString(16)
+        })
+    }
+
+    // 查看最短的那一列，是否铺满屏幕
+    function isMan() {
+        let container_items = document.querySelectorAll('.container_item');
+        let min = 0, minH = container_items[0].offsetHeight;
+
+        for (let i = 0; i < container_items.length; i++) {
+            if (container_items[i].offsetHeight < minH) {
+                minH = container_items[i].offsetHeight
+                min = i;
+            }
+        }
+        return (minH > container.offsetHeight + 40)
+    }
+
+    function createItemH() {
+        return 20 + Math.random() * 40
+    }
+
+    // 调整队列起始位置
+    function fixBuffer() {
+
+    }
+
+</script>
+</body>
+</html>

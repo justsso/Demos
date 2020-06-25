@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h2{
+            text-align: center;
+        }
+        /*图片列表*/
+        .img_area{
+            width: 600px;
+            height: 200px;
+            border: 1px solid gray;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px;
+            float: left;
+        }
+        .img_area img{
+            width: 180px;
+            height: 170px;
+        }
+        /*垃圾箱*/
+        .drop_area{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            float: left;
+            margin: 20px 200px;
+            opacity: 0.4;
+        }
+
+    </style>
+</head>
+<body>
+<h2>垃圾回收删除效果</h2>
+<div class="img_area">
+    <img data-index="1" src="img0.jpg"/>
+    <img data-index="2" src="img0.jpg"/>
+    <img data-index="3" src="img0.jpg"/>
+</div>
+<div class="drop_area"></div>
+<script>
+    //源对象进入目标对象后,改变目标对象透明度
+    var drop_area = document.querySelector(".drop_area");
+    drop_area.ondragenter = function(){
+//	ondragenter 应用于目标元素，拖拽源对象进入目标对象时触发
+        console.log("源对象进入目标对象");
+        drop_area.style.opacity = "0.7";
+    }
+    //鼠标拖拽源对象离开目标对象后,恢复目标对象透明度
+    drop_area.ondragleave = function(){
+//	ondragleave 应用于目标元素，源对象拖动着离开了目标对象，即当鼠标离开目标元素时调用（一般 有了 drop就没有dragleave 事件）
+        console.log("鼠标拖拽源对象离开目标对象");
+        drop_area.style.opacity = "0.4";
+    }
+
+    //为源对象添加事件监听--为源对象中保存数据,记录拖动了哪一个源对象
+    var img_area_img = document.querySelectorAll(".img_area>img");
+    //console.log(img_area_img)
+    for(var i=0;i<img_area_img.length;i++){
+        var item = img_area_img[i];
+        console.log(item)
+//	开始拖动源对象
+        item.ondragstart = function(event){
+//		ondragstart 应用于拖拽元素，源对象开始被拖动
+//		源对象中保存数据--该img元素的data-index;
+            event.dataTransfer.setData("imgIndex",this.dataset.index);
+            console.log(this.dataset.index);
+        }
+    }
+    //源对象在悬停在目标对象上时,阻止默认行为,使得drop可以触发
+    drop_area.ondragover = function(event){
+//	ondragover 应用于目标元素，拖拽源对象在目标对象上移动时触发
+        event.preventDefault();
+    }
+    //源对象松手释放在了目标对象中
+    drop_area.ondrop = function(event){
+//	ondrop 应用于目标元素，被拖拽的元素在目标元素上，松开鼠标时触发
+        console.log("松开拖动");
+        drop_area.style.opacity = "0.4";
+//	目标对象中读取数据
+// 	event.dataTransfer 在源对象和目标对象的事件间传递数据
+        var imgIndex = event.dataTransfer.getData("imgIndex");
+        console.log(imgIndex);
+//	获取源对象
+        var img_item = document.querySelector("img[data-index ='"+imgIndex+"']");
+        console.log(img_item);
+//	咨询框
+        var confirm_area = confirm("确定删除？");
+        if(confirm_area){
+//		删除DOM
+            img_item.parentNode.removeChild(img_item);
+        }else{
+            return false;
+        }
+    }
+
+</script>
+</body>
+</html>

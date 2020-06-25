@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            display: block;
+            width: 200px;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<img class="img_area" src="./img0.jpg" draggable="true">
+<script>
+    var img_area = document.querySelector("img.img_area");
+    // 记录初始偏移量
+    var offsetX,offsetY;
+    // console.log(img_area);
+    img_area.ondragstart = function (event) {
+        console.log("事件源开始被拖动");
+        // 记录刚拖动时，鼠标在源对象上的偏移量
+        offsetX = event.offsetX;
+        offsetY = event.offsetY;
+        event.dataTransfer.dropEffect = "move";
+        // console.log(offsetX);
+    }
+    img_area.ondrag = function (event) {
+        console.log("事件源拖动ing...");
+        // 记录拖动时，鼠标指针距离文档左侧及顶部的距离
+        var x = event.pageX;
+        var y = event.pageY;
+        console.log("距离左侧：" + x + "；距离顶部：" + y);
+        // 针对最后一刻x,y都为0的情景，不作处理
+        if (x==0 && y==0){
+            return false;
+        }
+        // 动态计算位置：
+        x -= offsetX;
+        y -= offsetY;
+        console.log("左：" + x + "；顶：" + y);
+        // 计算结果赋值
+        img_area.style.left = x+"px";
+        img_area.style.top = y+"px";
+    }
+    img_area.ondragend = function (event) {
+        console.log("事件源拖动结束");
+    }
+    //  img_area.ondragleave = function () {
+    //     ondragleave 应用于拖拽元素，拖拽过程中，当鼠标离开拖拽元素范围时调用
+    //     console.log("鼠标离开拖拽元素范围");
+    // }
+
+</script>
+</body>
+</html>

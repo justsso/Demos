@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap {
+        }
+
+        .item {
+            width: 400px;
+            height: 40px;
+            border: 1px solid #e6dede;
+        }
+
+        .active {
+            border-bottom: 1px dashed #F85770;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+</div>
+<script>
+    let arr = ['111', '222', '333', '444', '555'];
+    let $ = (str) => document.querySelector(str);
+    let $$ = (str) => document.querySelectorAll(str);
+    let wrap = $('.wrap');
+    let dragObj = null, enterObj = null, dragIndex, enterIndex;
+
+    arr.forEach((text, i) => {
+        let item = document.createElement('div')
+        item.classList = 'item';
+        item.innerText = text;
+        item.draggable = true;
+        item.dataset.index = i;
+        item.style.transition = 'all 0.2s ease';
+        wrap.appendChild(item)
+    })
+
+
+    wrap.addEventListener('dragstart', function (e) {
+        dragObj = e.target
+        dragIndex = e.target.dataset.index;
+        e.target.style.opacity = "0.1";
+    })
+    wrap.addEventListener('dragend', function (e) {
+        console.log('dragend')
+        e.target.style.opacity = "1";
+
+        console.log('drop  移动节点')
+        e.preventDefault();  // 避免浏览器的默认行为，drop事件的默认行为打开链接
+        console.log(dragObj, enterObj)
+        //在当前元素之前插;
+
+        if (e.target.className === 'item') {
+            if (enterObj !== dragObj) {
+                // 进行排序
+                if (dragIndex < enterIndex) {
+                    enterObj.after(dragObj)
+                } else {
+                    enterObj.before(dragObj)
+                }
+            }
+        }
+        let items = $$('.item');
+        items.forEach((item, i) => {
+            item.style.transform = `translate(0,0)`;
+            item.dataset.index = i;
+        })
+    })
+
+    wrap.addEventListener('dragenter', function (e) {
+        console.log('dragenter 触发动画');
+        let items = $$('.item');
+
+        if (e.target.className === 'item') {
+            enterObj = e.target;
+            enterIndex = e.target.dataset.index;
+
+            if (enterObj !== dragObj) {
+                if (enterIndex < dragIndex) {
+                    items.forEach(item => {
+                        if (item.dataset.index < enterIndex) {
+                            item.style.transform = 'translate(0,0)';
+                        } else if (item.dataset.index >= enterIndex && item.dataset.index < dragIndex) {
+                            item.style.transform = `translate(0, 100%)`;
+                        } else {
+                            item.style.transform = 'translate(0,0)';
+                        }
+                    })
+                } else {
+                    items.forEach(item => {
+                        if (item.dataset.index < dragIndex) {
+                            item.style.transform = 'translate(0,0)';
+                        } else if (item.dataset.index > dragIndex && item.dataset.index <= enterIndex) {
+                            item.style.transform = `translate(0, -100%)`;
+                        } else {
+                            item.style.transform = 'translate(0,0)';
+                        }
+                    })
+                }
+            } else {
+                // 是本元素，所有元素归位
+                items.forEach(item => {
+                    item.style.transform = 'translate(0,0)';
+                })
+            }
+        }
+    })
+    wrap.addEventListener('drop', function (e) {
+        // console.log('drop  移动节点')
+        // e.preventDefault();  // 避免浏览器的默认行为，drop事件的默认行为打开链接
+        // console.log(dragObj, enterObj)
+        // //在当前元素之前插;
+        // if (e.target.className === 'item') {
+        //
+        //     if (enterObj !== dragObj) {
+        //         // 进行排序
+        //         if (dragIndex < enterIndex) {
+        //             // enterObj.style.transform = 'translate(0,40px)';
+        //             enterObj.after(dragObj)
+        //         } else {
+        //             enterObj.before(dragObj)
+        //         }
+        //     }
+        // }
+        // let items = $$('.item');
+        // items.forEach((item, i) => {
+        //     item.style.transform = `translate(0,0)`;
+        //     item.dataset.index = i;
+        // })
+    })
+
+
+    wrap.addEventListener('dragover', function (e) {
+        // 默认情况下，无法将文字/元素放置到其他元素中。如果需要可以放置，我们要组织默认行为
+        e.preventDefault();
+    })
+
+</script>
+</body>
+</html>

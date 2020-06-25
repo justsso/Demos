@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.wrap{
+				height: 100px;
+				border: 1px solid #aaa;
+			}
+			.item{
+				height: 40px;
+				border: 1px solid #00479D;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<div class="item" draggable="true"   >1</div>
+			<div class="item" draggable="true">2</div>
+			<div class="item" draggable="true">3</div>
+			<div class="item" draggable="true">4</div>
+			<div class="item" draggable="true">5</div>
+		</div>
+		<div class="wrap"></div>
+		<script type="text/javascript">
+			let wrap = document.querySelector('.wrap');
+			wrap.addEventListener('drop', function(){
+				console.log('放下了')
+			},false)
+
+
+			document.querySelector('.item').addEventListener('dragstart', function(e){
+				console.log(e.offsetX, e.offsetY, e.pageX,e.pageY)
+			}, false)
+
+
+		</script>
+	</body>
+</html>

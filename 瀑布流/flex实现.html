@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.flex{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+
+			}
+			.flex-item{
+				flex: 1;
+				border: 1px solid #00479D;
+				align-items: flex-start;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="flex">
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+<!--			<div class="flex-item"></div>-->
+		</div>
+		<script type="text/javascript">
+			let flexContainer = document.querySelector('.flex');
+			let allFlexItem = document.querySelectorAll('.flex-item');
+			function getImgSrc(){
+				let index = Math.floor( Math.random()* 20)
+				return './img_flex/img'+index+'.jpg';
+			}
+
+			function getMinColumu(){
+				let min = 0, minH = 0;
+				for (let i = 0; i < allFlexItem.length; i++) {
+					console.log(allFlexItem[i].clientHeight)
+					if(allFlexItem[i].clientHeight < minH){
+						min = i;
+						minH = allFlexItem[i].clientHeight
+					}
+				}
+				return min;
+			}
+
+			// 初始化数据
+			let data = [];
+			for (let i = 0; i < 100; i++) {
+				data[i] = {
+					img: getImgSrc()
+				}
+			}
+
+			for (let i = 0; i < data.length; i++) {
+				// let index = getMinColumu(); // 得到最矮的那列
+				// console.log(index, '得到最矮的那列')
+				let imgSrc = getImgSrc();
+				// loadImags(index,imgSrc);  // 加载图片，
+
+				let newDiv =  document.createElement('div')
+				console.log(newDiv)
+				newDiv.className = 'flex-item';
+				let imgHeigth = getHeight(200, 300);
+				//					if((Lis[minHeightIndex].offsetHeight+Lis[minHeightIndex].offsetTop) < allHeight ){
+				var img = document.createElement('img');
+				img.setAttribute('src', imgSrc);
+				img.style.height = imgHeigth + 'px';
+				flexContainer.appendChild(newDiv);
+				newDiv.appendChild(img)
+
+
+			}
+
+
+
+
+			//图片加载方法
+
+			function loadImags(index, imgSrc) {
+				let imgHeigth = getHeight(200, 300);
+				//					if((Lis[minHeightIndex].offsetHeight+Lis[minHeightIndex].offsetTop) < allHeight ){
+				var img = document.createElement('img');
+				img.setAttribute('src', imgSrc);
+				img.style.height = imgHeigth + 'px';
+				//						console.log(img.style.height);
+				allFlexItem[index].appendChild(img);
+				//					}
+			}
+			//图片的高度是个随机数
+			function getHeight(min, max) {
+				var num = 0;
+				var range = max - min;
+				var Rand = Math.random();
+				num = min + Math.round(range * Rand);
+				return num;
+			}
+
+		</script>
+	</body>
+</html>
