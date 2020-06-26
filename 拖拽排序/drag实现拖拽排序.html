@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style>
         .wrap {
         }
 
         .item {
             width: 400px;
-            height: 40px;
             border: 1px solid #e6dede;
-        }
-
-        .active {
-            border-bottom: 1px dashed #F85770;
+            background: #fff;
         }
     </style>
 </head>
@@ -23,7 +20,12 @@
 <div class="wrap">
 </div>
 <script>
-    let arr = ['111', '222', '333', '444', '555'];
+    let arr = [
+        {text: '111', name: 'Jack', description: 'hello world'},
+        {text: '222', name: 'Rose', description: 'beautify'},
+        {text: '333', name: '黛玉', description: '天上掉下个林妹妹'},
+        {text: '444', name: '宝钗', description: '宝钗贳酒'},
+        {text: '555', name: '张筱雨', description: '三百亿'}];
     let $ = (str) => document.querySelector(str);
     let $$ = (str) => document.querySelectorAll(str);
     let wrap = $('.wrap');
@@ -33,9 +35,10 @@
 
 
     wrap.addEventListener('dragstart', function (e) {
+        console.log('dragstart')
         dragObj = e.target
         dragIndex = e.target.dataset.index;
-        e.target.style.opacity = "0.1";
+        e.target.style.opacity = '0'
     })
 
     wrap.addEventListener('dragend', function (e) {
@@ -100,12 +103,16 @@
         }
     })
 
-
     function render(arr) {
         arr.forEach((text, i) => {
             let item = document.createElement('div')
             item.classList = 'item';
-            item.innerText = text;
+            item.innerHTML = `<p>
+${text.text} <strong>${text.name}</strong>
+</p>
+<p>
+${text.description}
+</p>`;
             item.draggable = true;
             item.dataset.index = i;
             item.style.transition = 'all 0.2s ease';
